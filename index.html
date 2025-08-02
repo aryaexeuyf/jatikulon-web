@@ -1,379 +1,149 @@
-<!DOCTYPE html>  
-<html lang="zh">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <meta name="theme-color" content="#005F73">  
-    <title>Jati Kulon Village - The Definitive Experience</title>  
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Situs Diblokir</title>
+    <meta name="theme-color" content="#cc0000">
+    <link rel="icon" href="https://raw.githubusercontent.com/aryaexeuyf/Image/main/images%20(7).png">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
-        :root {
-            --primary-color: #005F73; --secondary-color: #0A9396;
-            --accent-color: #EE9B00; --light-bg: #F8F9FA;
-            --dark-color: #001219; --text-color: #333;
-            --white-color: #FFFFFF; --light-gray: #E9ECEF;
-            --shadow-strong: 0 10px 40px -10px rgba(0, 95, 115, 0.35);
-            --shadow-soft: 0 6px 15px rgba(0, 0, 0, 0.07);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--light-bg);
-            color: var(--text-color);
-            overflow-x: hidden;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+            text-align: center;
         }
 
-        /* --- PRELOADER --- */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--dark-color); z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            max-width: 700px;
+            width: 100%;
+            border-top: 8px solid #0d47a1; /* Biru khas Kominfo */
         }
-        #preloader h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; color: var(--white-color); }
-        #enter-button {
-            margin-top: 2rem; padding: 1rem 3rem; font-size: 1rem; font-weight: 700;
-            color: var(--white-color); background-color: var(--secondary-color);
-            border: none; border-radius: 50px; cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        #enter-button:hover { transform: scale(1.05) translateY(-5px); box-shadow: 0 15px 25px rgba(10, 147, 150, 0.4); }
-        #preloader.hidden { opacity: 0; visibility: hidden; }
 
-        .main-content { opacity: 0; transition: opacity 1.2s ease; }
-        .main-content.visible { opacity: 1; }
+        .logo {
+            max-width: 180px;
+            margin-bottom: 25px;
+        }
 
-        /* --- HEADER --- */
-        header {
-            position: relative; height: 100vh;
-            display: flex; justify-content: center; align-items: center; text-align: center; color: var(--white-color);
+        .main-title {
+            color: #d32f2f;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+            animation: pulse 1.8s infinite;
         }
-        .header-background {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0,18,25,0.7), rgba(0,95,115,0.5)), url('https://images.unsplash.com/photo-1598398791435-5a515f75746c?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed; z-index: -1;
-        }
-        .hero-content h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: clamp(3rem, 10vw, 5.5rem); }
-        .hero-content p { font-size: 1.2rem; max-width: 600px; margin: 1rem auto 0; }
-        
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed; top: 0; left: 0; width: 100%; padding: 1rem 5%;
-            display: flex; justify-content: space-between; align-items: center; z-index: 1000;
-            transition: all 0.4s ease;
-        }
-        nav.scrolled { background: rgba(0, 18, 25, 0.9); backdrop-filter: blur(10px); padding-block: 0.8rem; }
-        nav .logo { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--white-color); }
-        .language-switcher button {
-            background: transparent; color: var(--white-color); border: 1px solid var(--white-color);
-            padding: 0.5rem 1rem; border-radius: 20px; cursor: pointer; margin-left: 0.5rem;
-            transition: all 0.3s;
-        }
-        .language-switcher button:hover, .language-switcher button.active { background: var(--white-color); color: var(--primary-color); }
-        
-        /* --- GENERAL SECTION & CARD STYLING --- */
-        section { padding: 5rem 1rem; overflow: hidden; }
-        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
-        .section-title h2 {
-            font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 2.8rem);
-            color: var(--primary-color); text-align: center; margin-bottom: 4rem;
-        }
-        .card-3d {
-            background: var(--white-color); padding: 2.5rem; border-radius: 15px; text-align: center;
-            box-shadow: var(--shadow-soft); transition: all 0.3s ease-out; will-change: transform;
-        }
-        
-        /* --- TOPICS --- */
-        .grid-layout { display: grid; grid-template-columns: 1fr; gap: 2rem; }
-        #suasana { background: linear-gradient(160deg, #005f73, #0a9396, #94d2bd); background-size: 400% 400%; color: var(--white-color); animation: gradientAnimation 15s ease infinite; }
-        #suasana h2, #suasana p { color: var(--white-color); }
-        #kuliner { background: var(--light-gray); }
-        .kuliner-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px 15px 0 0; }
-        .kuliner-card .card-content { padding: 1.5rem; }
-        
-        /* --- ACCOMODATION --- */
-        .akomodasi-card {
-            display: flex; flex-direction: column; background: var(--white-color);
-            border-radius: 15px; box-shadow: var(--shadow-soft); overflow: hidden;
-        }
-        .akomodasi-card img { width: 100%; height: 220px; object-fit: cover; }
-        .akomodasi-card .card-content { padding: 2rem; }
-        
-        /* --- GALLERY & LIGHTBOX --- */
-        .gallery-item { cursor: pointer; overflow: hidden; border-radius: 15px; box-shadow: var(--shadow-soft); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
-        .gallery-item:hover img { transform: scale(1.1); }
-        .lightbox {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,18,25,0.9); z-index: 10000; display: flex;
-            justify-content: center; align-items: center; opacity: 0; visibility: hidden;
-            transition: all 0.5s ease;
-        }
-        .lightbox.show { opacity: 1; visibility: visible; }
-        .lightbox img { max-width: 90%; max-height: 80%; box-shadow: 0 0 50px rgba(0,0,0,0.5); }
-        .lightbox .close-btn { position: absolute; top: 2rem; right: 2rem; font-size: 3rem; color: var(--white-color); cursor: pointer; }
 
-        /* --- CONTACT & FOOTER --- */
-        #kontak { background: var(--dark-color); color: var(--light-gray); }
-        #kontak h2 { color: var(--white-color); }
-        .contact-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; }
-        .map-container { width: 100%; height: 300px; border-radius: 15px; overflow: hidden; }
-        .whatsapp-btn {
-            display: inline-block; background: #25D366; color: var(--white-color);
-            padding: 1rem 2rem; border-radius: 50px; text-decoration: none; font-weight: 700;
-            margin-top: 1rem; transition: all 0.3s;
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+            margin-top: 10px;
         }
-        .whatsapp-btn:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3); }
-        
-        /* --- ANIMATIONS & UTILITIES --- */
-        .hidden { display: none; }
-        .scroll-reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-        .scroll-reveal.visible { opacity: 1; transform: translateY(0); }
-        @keyframes gradientAnimation { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-        
-        /* --- RESPONSIVE DESIGN --- */
-        @media (min-width: 768px) {
-            .grid-layout { grid-template-columns: repeat(3, 1fr); }
-            #suasana .grid-layout { grid-template-columns: 1fr 1fr; }
-            .akomodasi-card { flex-direction: row; }
-            .akomodasi-card img { width: 40%; height: auto; }
-            .contact-grid { grid-template-columns: 1fr 1fr; }
+
+        .url-banner {
+            background-color: #d32f2f;
+            color: white;
+            padding: 12px 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border: 2px dashed #fff;
+            box-shadow: 0 4px 10px rgba(211, 47, 47, 0.4);
         }
+
+        .message-box {
+            background-color: #e3f2fd;
+            border-left: 6px solid #1976d2;
+            padding: 20px;
+            text-align: left;
+            margin-top: 25px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .message-box p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .blinking-cursor {
+            animation: blink 1s step-end infinite;
+            font-weight: bold;
+        }
+        
+        strong {
+            color: #0d47a1;
+        }
+
+        /* Animasi */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.03);
+                opacity: 0.9;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes blink {
+            from, to { color: transparent; }
+            50% { color: #333; }
+        }
+
     </style>
 </head>
-<body lang="zh">
-    <div id="preloader">
-        <h1>Jati Kulon</h1>
-        <button id="enter-button">进入网站 (Enter)</button>
+<body>
+
+    <div class="container">
+        <img src="https://raw.githubusercontent.com/aryaexeuyf/Image/main/images%20(7).png" alt="Logo Kominfo" class="logo">
+
+        <h1 class="main-title">SITUS DIBLOKIR</h1>
+        <p class="subtitle">Akses ke situs ini telah dibatasi oleh Kementerian Komunikasi dan Informatika.</p>
+
+        <div class="url-banner">
+            <span>URL: http://jatikulon-web/github.io</span>
+        </div>
+
+        <div class="message-box">
+            <p><strong>PEMBERITAHUAN:</strong></p>
+            <p>Situs ini tidak dapat diakses karena terindikasi melanggar peraturan perundang-undangan yang berlaku di wilayah Republik Indonesia.</p>
+            <p>
+                <strong>Alasan Pemblokiran:</strong> Tidak terdaftar sebagai Penyelenggara Sistem Elektronik (PSE) Lingkup Privat sesuai amanat <strong>Peraturan Pemerintah No. 71 Tahun 2019</strong> dan <strong>Permenkominfo No. 5 Tahun 2020</strong>.
+            </p>
+            <p>
+                <strong>Tindak Lanjut:</strong> Pemilik situs dikenakan sanksi administratif dan denda sebesar <strong>Rp 5.000.000,- (Lima Juta Rupiah)</strong>. Sanksi lebih lanjut akan diproses sesuai hukum yang berlaku.
+            </p>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2025 Kementerian Komunikasi dan Informatika Republik Indonesia</p>
+            <p>Tindak Lanjut sedang diproses<span class="blinking-cursor">_</span></p>
+        </div>
     </div>
 
-    <div class="main-content">
-        <header id="home">
-            <div class="header-background"></div>
-            <nav id="navbar">
-                <div class="logo">Jati Kulon</div>
-                <div class="language-switcher">
-                    <button onclick="changeLanguage('zh')" class="active">中文</button>
-                    <button onclick="changeLanguage('id')">ID</button>
-                    <button onclick="changeLanguage('en')">EN</button>
-                </div>
-            </nav>
-            <div class="hero-content">
-                <h1 data-lang="zh">欢迎来到贾蒂库隆</h1>
-                <h1 data-lang="id" class="hidden">Selamat Datang di Jati Kulon</h1>
-                <h1 data-lang="en" class="hidden">Welcome to Jati Kulon</h1>
-                <p data-lang="zh">在莫佐克托的心脏地带，发现宁静与欢乐。</p>
-                <p data-lang="id" class="hidden">Rasakan Ketenangan dan Keceriaan di Jantung Mojokerto.</p>
-                <p data-lang="en" class="hidden">Discover Serenity and Joy in the Heart of Mojokerto.</p>
-            </div>
-        </header>
-
-        <main>
-            <section id="suasana">
-                <div class="container grid-layout">
-                    <div class="suasana-text scroll-reveal">
-                        <h2 data-lang="zh" style="text-align: left;">天空中的喜悦</h2>
-                        <h2 data-lang="id" class="hidden" style="text-align: left;">Keceriaan di Langit</h2>
-                        <h2 data-lang="en" class="hidden" style="text-align: left;">Joy in the Skies</h2>
-                        <p data-lang="zh">下午是贾蒂库隆的神奇时刻。晴朗的蓝天成为数十只风筝欢快飞舞的画布。村里孩子们的欢声笑语，成为陪伴您走过稻田小径的最美妙的背景音乐。这不仅仅是风景，更是一种氛围，一种邀请您回归宁静和简单快乐的体验。</p>
-                        <p data-lang="id" class="hidden">Sore hari adalah momen magis di Jati Kulon. Langit biru menjadi kanvas bagi puluhan layang-layang yang menari riang. Tawa anak-anak desa menjadi musik latar paling merdu, menemani Anda menyusuri pematang sawah. Ini bukan sekadar pemandangan, ini adalah suasana, sebuah pengalaman yang mengundang Anda untuk kembali ke akar ketenangan dan kebahagiaan sederhana.</p>
-                        <p data-lang="en" class="hidden">Afternoons are magical in Jati Kulon. The blue sky becomes a canvas for dozens of kites dancing joyfully. The laughter of village children is the most beautiful background music, accompanying you along the rice paddies. This is more than a view; it's an atmosphere, an experience inviting you to return to the roots of tranquility and simple happiness.</p>
-                    </div>
-                    <div class="suasana-image-container scroll-reveal">
-                        <img src="https://images.unsplash.com/photo-1534940518845-38a435349372?q=80&w=1932&auto=format&fit=crop" alt="Anak-anak desa bermain" style="border-radius:15px; box-shadow:var(--shadow-strong);">
-                    </div>
-                </div>
-            </section>
-            
-            <section id="kuliner">
-                <div class="container">
-                    <div class="section-title scroll-reveal">
-                        <h2 data-lang="zh">品尝当地风味</h2>
-                        <h2 data-lang="id" class="hidden">Cicipi Rasa Lokal</h2>
-                        <h2 data-lang="en" class="hidden">Taste the Local Flavors</h2>
-                    </div>
-                    <div class="grid-layout">
-                        <div class="kuliner-card card-3d scroll-reveal">
-                            <img src="https://images.unsplash.com/photo-1512152272829-e3139592d56f?q=80&w=2070&auto=format&fit=crop" alt="Makanan lokal">
-                            <div class="card-content">
-                                <h3 data-lang="zh">贾蒂库隆玉米饭</h3>
-                                <h3 data-lang="id" class="hidden">Nasi Jagung Jati Kulon</h3>
-                                <h3 data-lang="en" class="hidden">Jati Kulon Corn Rice</h3>
-                                <p data-lang="zh">一道用当地最好的香料烹制的丰盛而正宗的菜肴。</p>
-                                <p data-lang="id" class="hidden">Sajian hangat dan otentik yang dimasak dengan bumbu terbaik dari desa.</p>
-                                <p data-lang="en" class="hidden">A hearty and authentic dish cooked with the best local spices.</p>
-                            </div>
-                        </div>
-                        <div class="kuliner-card card-3d scroll-reveal" style="transition-delay: 0.2s;">
-                            <img src="https://raw.githubusercontent.com/aryaexeuyf/Image/main/images%20(2)%20(7).jpeg" alt="Minuman segar">
-                            <div class="card-content">
-                                <h3 data-lang="zh">风之冰酿</h3>
-                                <h3 data-lang="id" class="hidden">Es Cendol</h3>
-                                <h3 data-lang="en" class="hidden">Wind Cendol Drink</h3>
-                                <p data-lang="zh">一种清爽的发酵木薯饮料，非常适合在炎热的一天享用。</p>
-                                <p data-lang="id" class="hidden">🧊 Es Cendol khas Mojokerto
-Minuman tradisional sing seger, isi cendol ijo kenyal, santan gurih, lan gula jawa cair khas kampung. Pas dinikmati waktu panas! 🍃</p>
-                                <p data-lang="en" class="hidden">🧊 Traditional Cendol from Mojokerto
-A refreshing local drink with chewy green rice flour jelly, rich coconut milk, and sweet palm sugar syrup — perfect for sunny days! 🍃</p>
-                            </div>
-                        </div>
-                        <div class="kuliner-card card-3d scroll-reveal" style="transition-delay: 0.4s;">
-                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1981&auto=format&fit=crop" alt="Jajanan pasar">
-                             <div class="card-content">
-                                <h3 data-lang="zh">传统市场小吃</h3>
-                                <h3 data-lang="id" class="hidden">Jajanan Pasar Sore</h3>
-                                <h3 data-lang="en" class="hidden">Afternoon Market Snacks</h3>
-                                <p data-lang="zh">探索各种每天新鲜制作的甜味和咸味小吃。</p>
-                                <p data-lang="id" class="hidden">Jelajahi berbagai camilan manis dan gurih yang dibuat segar setiap hari.</p>
-                                <p data-lang="en" class="hidden">Explore a variety of sweet and savory snacks made fresh daily.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="gallery">
-                <div class="container">
-                    <div class="section-title scroll-reveal">
-                        <h2 data-lang="zh">村庄魅力画廊</h2>
-                        <h2 data-lang="id" class="hidden">Galeri Pesona Desa</h2>
-                        <h2 data-lang="en" class="hidden">Village Charm Gallery</h2>
-                    </div>
-                    <div class="grid-layout" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-                        <div class="gallery-item scroll-reveal"><img src="https://raw.githubusercontent.com/aryaexeuyf/Image/main/IMG-20240420-WA0089.jpg" alt="Sawah"></div>
-                        <div class="gallery-item scroll-reveal"><img src="https://raw.githubusercontent.com/aryaexeuyf/Image/main/IMG-20240420-WA0088.jpg" alt="Kebun"></div>
-                        <div class="gallery-item scroll-reveal"><img src="https://raw.githubusercontent.com/aryaexeuyf/Image/main/IMG-20240420-WA0062.jpg" alt="Kabut pagi"></div>
-                    </div>
-                </div>
-            </section>
-            <div class="lightbox" id="lightbox">
-                <span class="close-btn">&times;</span>
-                <img src="" alt="Enlarged view" id="lightbox-img">
-            </div>
-
-            <section id="kontak">
-                <div class="container">
-                    <div class="section-title scroll-reveal">
-                        <h2 data-lang="zh">访问我们</h2>
-                        <h2 data-lang="id" class="hidden">Kunjungi Kami</h2>
-                        <h2 data-lang="en" class="hidden">Visit Us</h2>
-                    </div>
-                    <div class="contact-grid">
-                        <div class="contact-info scroll-reveal">
-                            <h3 data-lang="zh">联系信息</h3>
-                            <h3 data-lang="id" class="hidden">Informasi Kontak</h3>
-                            <h3 data-lang-="en" class="hidden">Contact Information</h3>
-                            <p data-lang="zh" style="margin-block: 1rem;">我们期待您的光临！如果您有任何问题或想预订住宿，请随时与我们联系。</p>
-                            <p data-lang="id" class="hidden" style="margin-block: 1rem;">Kami menantikan kedatangan Anda! Jangan ragu untuk menghubungi kami jika ada pertanyaan atau ingin memesan penginapan atau makanan dan minuman.</p>
-                            <p data-lang="en" class="hidden" style="margin-block: 1rem;">We look forward to your visit! Feel free to contact us with any questions or to book your stay.</p>
-                            <a href="https://wa.me/6281234200500" class="whatsapp-btn" target="_blank">
-                                <span data-lang="zh">通过WhatsApp联系</span>
-                                <span data-lang="id" class="hidden">Hubungi via WhatsApp</span>
-                                <span data-lang="en" class="hidden">Contact via WhatsApp</span>
-                            </a>
-                            <div style="margin-top: 2rem;">
-                                <h4 style="color:var(--secondary-color); margin-bottom:1rem;">Didukung Oleh:</h4>
-                                <p>REYVAN, BALQIS, GABRIL, dan seluruh warga Jati Kulon.</p>
-                                <h4 style="color:var(--secondary-color); margin-top:1.5rem; margin-bottom:1rem;">Website oleh:</h4>
-                                <p style="font-weight:bold; font-size:1.2rem;">APTECH MOJOKERTO</p>
-                            </div>
-                        </div>
-                        <div class="map-container scroll-reveal">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63284.8214246813!2d112.39233964491295!3d-7.464670417931326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e780c85c3e6648b%3A0x239e254e3848a604!2sMojokerto%2C%20Mojokerto%20City%2C%20East%20Java!5e0!3m2!1sen!2sid!4v1693833219456!5m2!1sen!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <div id="youtube-player-container" class="hidden"></div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const preloader = document.getElementById('preloader');
-            const enterButton = document.getElementById('enter-button');
-            const mainContent = document.querySelector('.main-content');
-            const nav = document.getElementById('navbar');
-            const langButtons = document.querySelectorAll('.language-switcher button');
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const closeBtn = document.querySelector('.lightbox .close-btn');
-
-            // --- BUG FIX: SCROLL TO TOP & ENTRY LOGIC ---
-            enterButton.addEventListener('click', () => {
-                preloader.classList.add('hidden');
-                mainContent.classList.add('visible');
-                
-                // Force scroll to top AFTER content is visible
-                setTimeout(() => {
-                    window.scrollTo(0, 0);
-                }, 0);
-
-                const ytContainer = document.getElementById('youtube-player-container');
-                ytContainer.innerHTML = `
-<iframe id="youtube-player" width="0" height="0" src="https://www.youtube.com/embed/lf8YE-qsYlQ?autoplay=1&loop=1&playlist=lf8YE-qsYlQ&enablejsapi=1" frameborder="0" allow="autoplay" allowfullscreen></iframe>`;
-            });
-
-            // --- NAVBAR SCROLL EFFECT ---
-            window.addEventListener('scroll', () => {
-                nav.classList.toggle('scrolled', window.scrollY > 50);
-            });
-
-            // --- LANGUAGE SWITCHER ---
-            const changeLanguage = (lang) => {
-                document.documentElement.lang = lang;
-                document.querySelectorAll('[data-lang]').forEach(el => {
-                    el.classList.toggle('hidden', el.dataset.lang !== lang);
-                });
-                langButtons.forEach(button => {
-                    button.classList.toggle('active', button.getAttribute('onclick').includes(`'${lang}'`));
-                });
-            };
-            window.changeLanguage = changeLanguage;
-            changeLanguage('zh'); // Set default language to Chinese
-
-            // --- 3D CARD TILT EFFECT ---
-            document.querySelectorAll('.card-3d').forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left - rect.width / 2;
-                    const y = e.clientY - rect.top - rect.height / 2;
-                    card.style.transform = `perspective(1000px) rotateX(${-y / 20}deg) rotateY(${x / 20}deg) scale(1.05)`;
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-                });
-            });
-
-            // --- LIGHTBOX GALLERY ---
-            galleryItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    const imgSrc = item.querySelector('img').src;
-                    lightboxImg.src = imgSrc;
-                    lightbox.classList.add('show');
-                });
-            });
-            const closeLightbox = () => lightbox.classList.remove('show');
-            closeBtn.addEventListener('click', closeLightbox);
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) closeLightbox();
-            });
-
-            // --- SCROLL REVEAL ANIMATION ---
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
-        });
-    </script>
 </body>
 </html>
